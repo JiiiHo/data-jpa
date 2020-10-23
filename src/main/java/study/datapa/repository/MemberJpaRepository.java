@@ -19,8 +19,6 @@ public class MemberJpaRepository {
 
     public Optional<Member> findById(Long id) {
         Member member = em.find(Member.class, id);
-        if (member == null)
-            return Optional.empty();
-        return Optional.of(member);
+        return Optional.ofNullable(member);
     }
 }
