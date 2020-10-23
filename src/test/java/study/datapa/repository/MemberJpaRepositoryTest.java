@@ -21,13 +21,13 @@ class MemberJpaRepositoryTest {
     MemberJpaRepository memberJpaRepository;
 
     @Test
-    public void testMember() {
+    public void testMember() throws Exception {
         Member member = Member.builder()
                 .username("memberA")
                 .build();
         Member save = memberJpaRepository.save(member);
 
-        Member findMember = memberJpaRepository.findById(save.getId()).orElseGet(Member::new);
+        Member findMember = memberJpaRepository.findById(save.getId()).orElseThrow(() -> new Exception());
 
         assertThat(findMember.getId()).isEqualTo(save.getId());
         assertThat(findMember.getUsername()).isEqualTo(save.getUsername());
